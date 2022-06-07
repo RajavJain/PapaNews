@@ -1,7 +1,8 @@
-{
-    "status": "ok",
-    "totalResults": 38,
-    "articles": [
+import React, { Component } from 'react'
+import NewsItems from './NewsItems'
+
+export default class News extends Component {
+    articles=[
         {
             "source": {
                 "id": null,
@@ -263,4 +264,28 @@
             "content": "MONDAY UPDATE, with actuals: Top Gun: Maverick hit even higher altitude at the global and international box office this weekend with Sunday’s actuals now included. Tom Cruise’s return as the eponymou… [+9370 chars]"
         }
     ]
+    constructor(){
+        super();
+        console.log("I am Constructor");
+        this.state={
+            articles : this.articles,
+            loading: false
+        }
+    }
+  render() {
+    return (
+      <div className='container my-3'>
+          <h1 className='my-4'>PapaNews - Top Headlines</h1>
+          <div className='row'>
+          {this.state.articles.map((element)=>{
+              return <div className='col-md-4' key={element.url}>
+              <NewsItems title={element.title} description={element.description} imageUrl={element.urlToImage} newsUrl={element.url}/>
+              </div>
+          })}
+              
+          </div>
+
+      </div>
+    )
+  }
 }
